@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Matsuo Bashō",
+    "bio": "Matsuo Bashō (1644 – November 28, 1694) was the most famous poet of the Edo period in Japan. He is recognized as the greatest master of haiku. His work deeply influenced the art form.",
+    "birthYear": 1644,
+    "deathYear": 1694,
+    "nationality": "Japanese",
+    "era": "Edo Period",
+    "haikus": []
+  },
+  {
+    "name": "Yosa Buson",
+    "bio": "Yosa Buson (1716 – January 17, 1784) was a Japanese poet and painter from the Edo period. He is considered one of the great masters of haiku and is known for his detailed, picturesque imagery.",
+    "birthYear": 1716,
+    "deathYear": 1784,
+    "nationality": "Japanese",
+    "era": "Edo Period",
+    "haikus": []
+  },
+  {
+    "name": "Kobayashi Issa",
+    "bio": "Kobayashi Issa (June 15, 1763 – January 5, 1828) was a Japanese poet and Buddhist priest known for his haiku, which often depicted the lives of ordinary people and small creatures with warmth and pathos.",
+    "birthYear": 1763,
+    "deathYear": 1828,
+    "nationality": "Japanese",
+    "era": "Edo Period",
+    "haikus": []
+  },
+  {
+    "name": "Masaoka Shiki",
+    "bio": "Masaoka Shiki (September 17, 1867 – September 19, 1902) was a Japanese poet, literary critic, and journalist. He is regarded as one of the four great masters of haiku, along with Bashō, Buson, and Issa, and a key figure in modernizing Japanese literature.",
+    "birthYear": 1867,
+    "deathYear": 1902,
+    "nationality": "Japanese",
+    "era": "Meiji Era",
+    "haikus": []
+  }
+]
