@@ -9,13 +9,14 @@ import {
   IsMongoId,
   IsOptional,
 } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class HaikuDto {
   @IsString()
   title: string;
 
   @IsMongoId()
-  author: string;
+  author: Types.ObjectId | string;
 
   @IsArray()
   @IsString({ each: true })
