@@ -21,11 +21,12 @@ export class AuthorController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async getAuthors(@Query('page') page : number, @Query('limit') limit: number) {
+  async getAuthors(@Query('page') page: number = 1 , @Query('limit') limit: number = 10) {
     try {
-      const authors = await this.authorService.findAll();
+      const authors = await this.authorService.findAll(page, limit);
       return {
         message: 'Success',
+        noOfAuthors: Array.from(authors).length,
         data: authors,
       };
     } catch (error) {

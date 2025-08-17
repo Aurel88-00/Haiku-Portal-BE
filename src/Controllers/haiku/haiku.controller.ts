@@ -8,6 +8,7 @@ import {
   Body,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 import { Types } from 'mongoose';
@@ -20,11 +21,12 @@ export class HaikuController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async getHaikus() {
+  async getHaikus(@Query('page') page: number = 1 , @Query('limit') limit: number = 10) {
     try {
-      const haikus = await this.haikuService.findAll();
+      const haikus = await this.haikuService.findAll(page, limit);
       return {
         message: 'Success',
+        noOfHaikus: Array.from(haikus).length,
         data: haikus,
       };
     } catch (error) {

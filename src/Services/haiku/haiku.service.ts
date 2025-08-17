@@ -6,21 +6,31 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { QueryService } from 'src/lib/common/query-service.class';
 import { HaikuDto } from 'src/lib/dtos/haiku.dto';
 import { IHaiku } from 'src/lib/interfaces/haiku.interface';
 import { AuthorDocument } from 'src/lib/schemas/author.schema';
 import { HaikuDocument } from 'src/lib/schemas/haiku.schema';
 
 @Injectable()
-export class HaikuService {
+export class HaikuService extends QueryService<HaikuDocument> {
   constructor(
     @InjectModel('Haiku') private haikuModel: Model<HaikuDocument>,
     @InjectModel('Author') private authorModel: Model<AuthorDocument>,
-  ) {}
+  ) {
+    super(haikuModel);
+  }
 
-  async findAll(): Promise<IHaiku[]> {
-    const haikus = this.haikuModel.find().populate('author').exec();
-    return haikus as unknown as IHaiku[];
+  async findAll(
+    page?: number,
+    limit?: number,
+    populateKey = 'author',
+  ): Promise<IHaiku[]> {
+    return this.PaginationPattern(
+      page,
+      limit,
+      populateKey,
+    ) as unknown as IHaiku[];
   }
 
   async findOne(id: Types.ObjectId): Promise<IHaiku> {
