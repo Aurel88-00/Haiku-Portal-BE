@@ -1,3 +1,4 @@
+import { CacheInterceptor } from '@nestjs/cache-manager';
 import {
   Controller,
   Get,
@@ -9,6 +10,7 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 import { Types } from 'mongoose';
@@ -16,6 +18,7 @@ import { HaikuDto } from 'src/lib/dtos/haiku.dto';
 import { HaikuService } from 'src/Services/haiku/haiku.service';
 
 @Controller('/haikus')
+@UseInterceptors(CacheInterceptor)
 export class HaikuController {
   constructor(private readonly haikuService: HaikuService) {}
 

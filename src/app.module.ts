@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './Modules/auth/auth.module';
 import { AuthorModule } from './Modules/author/author.module';
 import { HaikuModule } from './Modules/haiku/haiku.module';
+import { CacheModule } from '@nestjs/cache-manager';
 
 const mongoURI = process.env.MONGO_CONNECTION_URI as string;
 
@@ -18,6 +19,10 @@ const mongoURI = process.env.MONGO_CONNECTION_URI as string;
           limit: 10,
         },
       ],
+    }),
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 120000,
     }),
     MongooseModule.forRoot(mongoURI),
     AuthModule,
