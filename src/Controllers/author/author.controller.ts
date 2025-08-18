@@ -4,7 +4,9 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpException,
   HttpStatus,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -12,7 +14,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { Types } from 'mongoose';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 import { AuthorService } from 'src/Services/author/author.service';
 import { AuthorDto } from 'src/lib/dtos/author.dto';
 import { CacheInterceptor } from '@nestjs/cache-manager';
@@ -32,8 +33,8 @@ export class AuthorController {
         noOfAuthors: Array.from(authors).length,
         data: authors,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message , error?.status);
     }
   }
 
@@ -46,8 +47,8 @@ export class AuthorController {
         message: 'Success',
         data: author,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message , error?.status);
     }
   }
 
@@ -60,8 +61,8 @@ export class AuthorController {
         message: 'Success',
         data: author,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    }catch (error: any) {
+      throw new HttpException(error?.message , error?.status);
     }
   }
 
@@ -77,8 +78,8 @@ export class AuthorController {
         message: 'Success',
         data: author,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message , error?.status);
     }
   }
 
@@ -87,8 +88,8 @@ export class AuthorController {
   async remove(@Param('id') id: Types.ObjectId) {
     try {
       await this.authorService.remove(id);
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message , error?.status);
     }
   }
 }

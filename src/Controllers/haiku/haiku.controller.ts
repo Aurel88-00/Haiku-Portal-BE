@@ -11,6 +11,7 @@ import {
   HttpStatus,
   Query,
   UseInterceptors,
+  HttpException,
 } from '@nestjs/common';
 import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 import { Types } from 'mongoose';
@@ -24,7 +25,10 @@ export class HaikuController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async getHaikus(@Query('page') page: number = 1 , @Query('limit') limit: number = 10) {
+  async getHaikus(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ) {
     try {
       const haikus = await this.haikuService.findAll(page, limit);
       return {
@@ -32,8 +36,8 @@ export class HaikuController {
         noOfHaikus: Array.from(haikus).length,
         data: haikus,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message, error?.status);
     }
   }
 
@@ -46,8 +50,8 @@ export class HaikuController {
         message: 'Success',
         data: haiku,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message, error?.status);
     }
   }
 
@@ -60,8 +64,8 @@ export class HaikuController {
         message: 'Success',
         data: haiku,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message, error?.status);
     }
   }
 
@@ -77,8 +81,8 @@ export class HaikuController {
         message: 'Success',
         data: haiku,
       };
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message, error?.status);
     }
   }
 
@@ -87,8 +91,8 @@ export class HaikuController {
   async deleteHaiku(@Param('id') id: Types.ObjectId) {
     try {
       return this.haikuService.remove(id);
-    } catch (error) {
-      throw new ExceptionsHandler(error);
+    } catch (error: any) {
+      throw new HttpException(error?.message, error?.status);
     }
   }
 }
