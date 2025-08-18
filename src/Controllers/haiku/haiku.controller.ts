@@ -12,14 +12,16 @@ import {
   Query,
   UseInterceptors,
   HttpException,
+  UseGuards,
 } from '@nestjs/common';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 import { Types } from 'mongoose';
+import { AuthGuard } from 'src/Guards/auth.guard';
 import { HaikuDto } from 'src/lib/dtos/haiku.dto';
 import { HaikuService } from 'src/Services/haiku/haiku.service';
 
 @Controller('/haikus')
 @UseInterceptors(CacheInterceptor)
+@UseGuards(AuthGuard)
 export class HaikuController {
   constructor(private readonly haikuService: HaikuService) {}
 

@@ -11,15 +11,18 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Types } from 'mongoose';
 import { AuthorService } from 'src/Services/author/author.service';
 import { AuthorDto } from 'src/lib/dtos/author.dto';
 import { CacheInterceptor } from '@nestjs/cache-manager';
+import { AuthGuard } from 'src/Guards/auth.guard';
 
 @Controller('/authors')
 @UseInterceptors(CacheInterceptor)
+@UseGuards(AuthGuard)
 export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
 
